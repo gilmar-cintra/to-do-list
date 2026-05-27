@@ -138,3 +138,101 @@ Implementar recursos adicionais para aumentar a complexidade do projeto:
 ### Resultado Esperado
 
 Ao final do projeto, o desenvolvedor terá construído uma API completa de gerenciamento de tarefas utilizando Laravel 13, aplicando conceitos fundamentais de desenvolvimento backend, autenticação, autorização, testes automatizados e boas práticas de engenharia de software.
+
+
+## Dica para melhorar os commits
+
+Uma forma profissional de fazer commits é seguir três princípios:
+
+1. **Cada commit deve representar uma única mudança lógica.**
+2. **A mensagem deve explicar o que foi alterado.**
+3. **O histórico deve ser fácil de entender meses depois.**
+
+## Estrutura recomendada (Conventional Commits)
+
+Use o padrão:
+
+```text
+tipo(escopo): descrição curta
+```
+
+### Exemplos
+
+```bash
+git commit -m "feat(auth): implement user login endpoint"
+```
+
+```bash
+git commit -m "fix(tasks): correct task status validation"
+```
+
+```bash
+git commit -m "test(auth): add login request validation tests"
+```
+
+```bash
+git commit -m "refactor(user): simplify user creation service"
+```
+
+```bash
+git commit -m "docs(api): update authentication documentation"
+```
+
+---
+
+## Tipos mais utilizados
+
+| Tipo     | Quando usar                           |
+| -------- | ------------------------------------- |
+| feat     | Nova funcionalidade                   |
+| fix      | Correção de bug                       |
+| refactor | Refatoração sem alterar comportamento |
+| test     | Inclusão ou alteração de testes       |
+| docs     | Documentação                          |
+| style    | Formatação, lint, identação           |
+| chore    | Tarefas de manutenção                 |
+| perf     | Melhoria de performance               |
+| ci       | Pipeline CI/CD                        |
+| build    | Dependências ou build                 |
+
+---
+
+## Exemplo para o projeto Laravel
+
+### Cadastro de usuário
+
+```bash
+git commit -m "feat(auth): implement user registration"
+```
+
+### Testes de cadastro
+
+```bash
+git commit -m "test(auth): add registration validation tests"
+```
+
+### Login
+
+```bash
+git commit -m "feat(auth): implement user authentication"
+```
+
+### Testes de login
+
+```bash
+git commit -m "test(auth): add login endpoint tests"
+```
+
+### CRUD de tarefas
+
+```bash
+git commit -m "feat(tasks): implement task CRUD operations"
+```
+
+### Policies
+
+```bash
+git commit -m "feat(tasks): add authorization policies"
+```
+
+---
