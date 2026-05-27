@@ -1,58 +1,140 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Projeto 1 – API de Lista de Tarefas
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Objetivo
 
-## About Laravel
+Este projeto tem como objetivo o desenvolvimento de uma API REST utilizando **Laravel 13**, seguindo boas práticas de arquitetura, autenticação, autorização e testes automatizados com **PHPUnit**.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+A aplicação permitirá o gerenciamento de tarefas pessoais por usuários autenticados, além de disponibilizar funcionalidades administrativas para gerenciamento global do sistema.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+O foco deste projeto é consolidar conhecimentos em:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* Laravel 13
+* APIs RESTful
+* Autenticação e autorização
+* Policies e Gates
+* Testes automatizados com PHPUnit
+* Validação de dados
+* Relacionamentos entre entidades
+* Controle de acesso baseado em perfis (RBAC)
+* Tratamento de erros e respostas padronizadas
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Perfis de Usuário
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+O sistema possuirá três níveis de acesso:
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### 1. Visitante (Guest)
 
-## Agentic Development
+Usuários não autenticados poderão:
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+* Criar uma nova conta de usuário comum;
+* Realizar login no sistema;
+* Solicitar recuperação de senha através do recurso **"Esqueci minha senha"**;
+* Redefinir a senha utilizando o token de recuperação.
 
-```bash
-composer require laravel/boost --dev
+---
 
-php artisan boost:install
-```
+### 2. Usuário Comum
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Usuários autenticados com perfil comum poderão gerenciar apenas suas próprias tarefas.
 
-## Contributing
+#### Funcionalidades
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* Criar uma nova tarefa;
+* Listar todas as suas tarefas;
+* Visualizar os detalhes de uma tarefa específica;
+* Editar uma tarefa criada por ele;
+* Marcar uma tarefa como concluída;
+* Reabrir uma tarefa concluída;
+* Excluir uma tarefa;
+* Filtrar tarefas por status (pendente/concluída);
+* Pesquisar tarefas por título.
+* Visualizar seus próprios dados de cadastro
+* Editar seus dados de cadastro
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 3. Administrador
 
-## Security Vulnerabilities
+Usuários com perfil de administrador terão acesso completo ao sistema.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### Gerenciamento de Usuários
 
-## License
+* Listar todos os usuários cadastrados;
+* Visualizar os dados de um usuário específico;
+* Criar usuários;
+* Editar informações de usuários;
+* Excluir usuários.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Gerenciamento de Tarefas
+
+* Visualizar todas as tarefas do sistema;
+* Listar tarefas de um usuário específico;
+* Visualizar detalhes de qualquer tarefa;
+* Criar tarefas para qualquer usuário;
+* Editar tarefas de qualquer usuário;
+* Marcar qualquer tarefa como concluída;
+* Reabrir tarefas concluídas;
+* Excluir qualquer tarefa.
+
+---
+
+## Regras de Negócio
+
+* Cada tarefa pertence a apenas um usuário;
+* Usuários comuns só podem acessar suas próprias tarefas;
+* Administradores podem acessar e gerenciar todas as tarefas;
+* Apenas usuários autenticados podem manipular tarefas;
+* O título da tarefa é obrigatório;
+* Tarefas devem possuir um status (*Pendente* ou *Concluída*);
+* A API deve retornar códigos HTTP adequados para cada operação.
+
+---
+
+## Testes Automatizados
+
+O projeto deverá possuir cobertura de testes utilizando **PHPUnit**, contemplando:
+
+### Testes de Autenticação
+
+* Cadastro de usuário;
+* Login;
+* Recuperação de senha;
+* Controle de acesso a rotas protegidas.
+
+### Testes de Tarefas
+
+* Criação de tarefas;
+* Edição de tarefas;
+* Exclusão de tarefas;
+* Listagem de tarefas;
+* Alteração de status;
+* Restrições de acesso entre usuários.
+
+### Testes Administrativos
+
+* Gerenciamento de usuários;
+* Gerenciamento global de tarefas;
+* Verificação das permissões de administrador.
+
+---
+
+## Desafio Extra (Opcional)
+
+Implementar recursos adicionais para aumentar a complexidade do projeto:
+
+* Paginação de resultados;
+* Ordenação de tarefas;
+* Soft Deletes;
+* Logs de atividades;
+* Documentação da API com Swagger/OpenAPI;
+* Dockerização da aplicação;
+* Integração contínua (GitHub Actions);
+* Cobertura mínima de testes superior a 80%.
+
+---
+
+### Resultado Esperado
+
+Ao final do projeto, o desenvolvedor terá construído uma API completa de gerenciamento de tarefas utilizando Laravel 13, aplicando conceitos fundamentais de desenvolvimento backend, autenticação, autorização, testes automatizados e boas práticas de engenharia de software.
